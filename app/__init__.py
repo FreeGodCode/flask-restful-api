@@ -74,6 +74,8 @@ if environment == 'socket':
 from app.Models.Log import Log
 
 
+# 引入数据库事件
+# from app.Event import log
 @event.listens_for(Log, 'before_insert')
 def log_before_insert(mapper, connection, target):
     target.create_time = int(time.time())
@@ -81,7 +83,20 @@ def log_before_insert(mapper, connection, target):
 
 # 在socket模式下使用后台线程作为计划任务
 if environment == 'job':
-    # 任务调度
+    # 任务调度, 定时任务
     scheduler = BlockingScheduler()
+
+
     # 任务引入
-    from app.Job import Cron, Interval
+    # from app.Job import cron, interval
+
+    # 定时任务,使用cron触发类型,并使用装饰器实现,循环执行,每隔5秒钟执行一次
+    @scheduler.scheduled_job('cron', second=5)
+    def interval_job():
+        print('<cron_job>' + time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time())))
+
+
+    # 定时任务,使用interval触发类型,并使用装饰器实现,循环执行,每隔5秒钟执行一次
+    @scheduler.scheduled_job('interval', second=5)
+    def interval_job():
+        print('<interval_job>' + time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time())))

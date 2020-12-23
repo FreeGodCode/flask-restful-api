@@ -1,6 +1,6 @@
 # -*- coding: utf-8  -*-
 # @Author: ty
-# @File name: Log.py 
+# @File name: log.py
 # @IDE: PyCharm
 # @Create time: 12/23/20 11:15 AM
 import logging

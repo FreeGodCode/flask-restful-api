@@ -4,9 +4,10 @@
 # @IDE: PyCharm
 # @Create time: 12/23/20 11:06 AM
 import cerberus
+from cerberus import errors
 
 
-class CustomErrorHandler(cerberus.errors.BasicErrorHandler):
+class CustomErrorHandler(errors.BasicErrorHandler):
     """"""
 
     def __init__(self, tree=None, custom_messages=None):
@@ -19,8 +20,8 @@ class CustomErrorHandler(cerberus.errors.BasicErrorHandler):
             try:
                 temp = temp[i]
             except KeyError:
-                return super(CustomErrorHandler, self).format_message(field, error)
+                return super(CustomErrorHandler, self)._format_message(field, error)
         if isinstance(temp, dict):
-            return super(CustomErrorHandler, self).format_message(field, error)
+            return super(CustomErrorHandler, self)._format_message(field, error)
         else:
             return temp
