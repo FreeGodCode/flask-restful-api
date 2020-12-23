@@ -10,6 +10,7 @@ BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 
 # sqlalchemy settings
 SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:123456@127.0.0.1:3306/flask-restful-api?charset=utf8'
+# SQLALCHEMY_DATABASE_URI = 'mysql+mysqlconnector://root:123456@127.0.0.1:3306/flask-restful-api?charset=utf8'
 SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 # debug
@@ -26,3 +27,6 @@ MAX_CONTENT_LENGTH = 10 * 1024 * 1024
 # 允许上传文件格式
 ALLOWED_EXTENSIONS = ['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif']
 
+# jwt
+SECRET_KEY = 'Tycarry'
+JWT_LEEWAY = 604800
