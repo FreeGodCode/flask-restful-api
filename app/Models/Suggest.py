@@ -6,6 +6,7 @@
 from sqlalchemy.orm import relationship, foreign, remote
 from sqlalchemy_serializer import SerializerMixin
 
+from Utils.Utils import Utils
 from app import dbSession
 from app.Models.BaseModel import BaseModel
 from app.Models.Model import HotSuggest
@@ -22,7 +23,7 @@ class Suggest(HotSuggest, BaseModel, SerializerMixin):
         :return:
         """
         data = dbSession.query(Suggest).filter(User.id == Suggest.user_id).all()
-        data_msg = Utils.db_1_to_d(data)
+        data_msg = Utils.list_to_dict(data)
         return data_msg
 
     @staticmethod
@@ -32,7 +33,7 @@ class Suggest(HotSuggest, BaseModel, SerializerMixin):
         :return:
         """
         data = dbSession.query(Suggest).join(User, User.id == Suggest.user_id).all()
-        data_msg = Utils.db_1_to_d(data)
+        data_msg = Utils.list_to_dict(data)
         return data_msg
 
     @staticmethod
@@ -42,5 +43,5 @@ class Suggest(HotSuggest, BaseModel, SerializerMixin):
         :return:
         """
         data = dbSession.query(Suggest).outerjoin(User, User.id == Suggest.user_id).all()
-        data_msg = Utils.db_1_to_d(data)
+        data_msg = Utils.list_to_dict(data)
         return data_msg
