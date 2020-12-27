@@ -3,18 +3,15 @@
 # @File name: run.py 
 # @IDE: PyCharm
 # @Create time: 12/21/20 5:50 PM
+
 from flask_cors import CORS
 
-from app import create_app
+import environment
+from app import app
 
+environment.init('run')
 
-app = create_app()
-
-
-
-
-
-
+app = app
 CORS(app, suports_credentials=True)
 if __name__ == '__main__':
     app.debug = False
